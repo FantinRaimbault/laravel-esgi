@@ -1,6 +1,5 @@
 @extends('layouts.app')
-
-<h1>Create project</h1>
+@section('main')
 @if ($errors->any())
 <div class="alert alert-primary" role="alert">
     <ul>
@@ -21,9 +20,13 @@
 <div class="p-6 bg-white border-b border-gray-200">
     <h1>Projects View</h1>
     @foreach($projects as $project)
-    <h2>Nom du projet: {{ $project->name}}</h2>
+    <a href="{{ url('projects/' . $project->id . '/informations') }}">
+        <h2>Nom du projet: {{ $project->name}}</h2>
+    </a>
+    
     @foreach($project->users as $user)
     <span>Collaborateurs: {{ $user->name }}</span>
     @endforeach
     @endforeach
 </div>
+@endsection

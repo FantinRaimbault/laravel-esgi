@@ -17,6 +17,10 @@ class Project extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'contributors');
+        return $this->belongsToMany(User::class, 'contributors')->withPivot(['role', 'id']);
+    }
+
+    public function toto() {
+        return 'toto';
     }
 }

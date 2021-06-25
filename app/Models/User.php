@@ -3,6 +3,10 @@
 namespace App\Models;
 
 use App\Models\Project;
+use App\Models\Invitation;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -43,6 +47,45 @@ class User extends Authenticatable
 
     public function projects()
     {
-        return $this->belongsToMany(Project::class, 'contributors');
+        return $this->belongsToMany(Project::class, 'contributors')->withPivot(['role', 'id']);;
+    }
+
+    public function invitations()
+    {
+        return $this->hasMany(Invitation::class);
+    }
+
+    public function getContributor(int $projectId)
+    {
+        return Contributor::where([
+            ['user_id', '=', $this->id],
+            ['project_id', '=', $projectId],
+        ])->first();
+    }
+
+    public function getRole(int $projectId) {
+        return Contributor::where([
+            ['user_id', '=', $this->id],
+            ['project_id', '=', $projectId],
+        ])->first()->role;
+    }
+
+    public function canEditContributor($targetContributor) {
+        error_log('totototo');
+        $contributor = Auth::user()->projects()->where('projects.id', Session::get('currentProject')['id'])->first()->pivot;
+        if($contributor->user_id === $targetContributor->user_id) {
+            return true;
+        } else {
+            switch ($contributor->role) {
+                case Config::get('constants.contributors.roles.editor'):
+                    return false;
+                case Config::get('constants.contributors.roles.admin'):
+                    return $targetContributor->role !== Config::get('constants.contributors.roles.superAdmin');
+                case Config::get('constants.contributors.roles.superAdmin'):
+                    return true;
+                default:
+                    throw new \Exception('invalid role');
+            }
+        }
     }
 }
