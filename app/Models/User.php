@@ -94,6 +94,11 @@ class User extends Authenticatable
             === Config::get('constants.contributors.roles.editor');
     }
 
+    public function isAdminApp()
+    {
+        return Auth::user()->role === Config::get('constants.users.roles.admin');
+    }
+
     public function canPublishArticle() {
         $contributor = Auth::user()->projects()->where('projects.id', Session::get('currentProject')['id'])->first()->pivot;
         return in_array($contributor->role, Config::get('constants.contributors.canPublishArticle'));

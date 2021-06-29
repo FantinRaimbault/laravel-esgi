@@ -5,17 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Report extends Model
+class Ban extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'message',
-        'article_id',
-        'user_id'
+        'cause',
+        'project_id',
+        'until'
     ];
-
-    public function user() {
-        return $this->belongsTo(User::class);
-    }
 }

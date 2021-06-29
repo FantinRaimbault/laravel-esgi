@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\Admin;
+use App\Http\Middleware\IsProjectBanned;
 use App\Http\Middleware\CanEditContributor;
 use App\Http\Middleware\HasAccessToProject;
 use App\Http\Middleware\HasAlreadySentReport;
@@ -70,6 +72,8 @@ class Kernel extends HttpKernel
         'storeProjectInSession' => StoreProjectInSession::class,
         'canEditContributor' => CanEditContributor::class,
         'canDeleteArticle' => CanDeleteArticle::class,
-        'hasAlreadySentReport' => HasAlreadySentReport::class
+        'hasAlreadySentReport' => HasAlreadySentReport::class,
+        'isAdmin' => Admin::class,
+        'isProjectBanned' => IsProjectBanned::class
     ];
 }
