@@ -1,5 +1,5 @@
-@extends('layouts.main_navbar')
-@section('content')
+@extends('projects.layouts.home')
+@section('contentbis')
 @if ($errors->any())
 <div class="alert alert-danger" role="alert">
     <ul>

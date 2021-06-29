@@ -27,7 +27,7 @@
 {{ Form::label('title', 'Article Title') }}
 {{ Form::text('title', $article->title) }}
 {{ Form::label('category_id', 'Category') }}
-{{ Form::text('category_id', $article->category_id) }}
+{{ Form::select('category_id', $categories, $article->category_id) }}
 @if (!Auth::user()->isEditor())
 {{ Form::label('published', 'Published') }}
 {{ Form::checkbox('published', $article->published, $article->published) }}

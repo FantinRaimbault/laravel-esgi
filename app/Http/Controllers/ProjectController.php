@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Validator;
 
 class ProjectController extends Controller
@@ -27,9 +28,10 @@ class ProjectController extends Controller
         $project = new Project([
             "name" => $request->name,
             "description" => $request->description,
+            "slug" => preg_replace('/\s+/', '-', strtolower($request->name))
         ]);
         $project->save();
-        $user->projects()->attach($project->id);
+        $user->projects()->attach($project->id, ['role' => Config::get('constants.contributors.roles.superAdmin')]);
         return back()->with('success', 'Project created !');
     }
 

@@ -1,4 +1,4 @@
-@extends('layouts.main_navbar')
+@extends('admin.layouts.admin')
 @section('contentbis')
 <a href="{{ url('admin') }}">
     <button type="button" class="btn btn-primary m-3">

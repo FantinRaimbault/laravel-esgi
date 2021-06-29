@@ -14,4 +14,8 @@ class Ban extends Model
         'project_id',
         'until'
     ];
+
+    public function project() {
+        return $this->belongsTo(Project::class);
+    }
 }

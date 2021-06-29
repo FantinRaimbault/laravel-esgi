@@ -6,6 +6,7 @@ use App\Models\Ban;
 use App\Models\Article;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
@@ -51,5 +52,17 @@ class AdminController extends Controller
         $article = Article::findOrFail($request->route('articleId'));
         $article->delete();
         return back()->with('success', 'Article deleted !');
+    }
+
+    public function showBannedProject() {
+        $bans = Ban::groupBy('project_id')->get(['project_id', DB::raw('MAX(until) as until')]);
+        return view('admin.banned_projects', [
+            "bans" => $bans
+        ]);
+    }
+
+    public function removeBannedProject(Request $request) {
+        Ban::where('project_id', $request->route('projectId'))->delete();
+        return back()->with('success', 'Ban removed from project !');
     }
 }

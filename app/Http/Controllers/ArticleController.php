@@ -50,8 +50,14 @@ class ArticleController extends Controller
     public function edit(Request $request) {
         $articleId = $request->route('articleId');  
         $article = Article::findOrFail($articleId);
+        $categories = Category::where('type', 'article')->select('id', 'name')->get();
+        $categoriesKeyName = [];
+        foreach ($categories->toArray() as $value) {
+            $categoriesKeyName[$value['id']] = $value['name'];
+        }
         return view('projects.articles.article_edit', [
-            "article" => $article
+            "article" => $article,
+            'categories' => $categoriesKeyName
         ]);
     }
 
