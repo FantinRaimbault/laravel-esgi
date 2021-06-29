@@ -3,11 +3,11 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Models\Contributor;
+use App\Models\Report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CanEditContributor
+class HasAlreadySentReport
 {
     /**
      * Handle an incoming request.
@@ -18,10 +18,12 @@ class CanEditContributor
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = Auth::user();
-        $contributor = Contributor::findOrFail($request->route('contributorId'));
-        if(!$user->canEditContributor($contributor)) {
-            return back()->withErrors('Can\'t access to this ressource !');
+        $report = Report::where([
+            ['user_id', '=', Auth::id()],
+            ['article_id', '=', $request->route('articleId')]
+        ])->first();
+        if (!empty($report)) {
+            return back()->withErrors('You have already send a report for this project');
         }
         return $next($request);
     }

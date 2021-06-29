@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnPublishArticlesTable extends Migration
+class AddDefaultPublishArticlesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddColumnPublishArticlesTable extends Migration
     public function up()
     {
         Schema::table('articles', function (Blueprint $table) {
-            $table->boolean('published');
+            $table->boolean('published')->default(false)->change();;
         });
     }
 
@@ -26,7 +26,7 @@ class AddColumnPublishArticlesTable extends Migration
     public function down()
     {
         Schema::table('articles', function (Blueprint $table) {
-            $table->dropColumn('published');
+            $table->boolean('published')->change();
         });
     }
 }

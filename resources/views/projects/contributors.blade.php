@@ -31,7 +31,12 @@
         @foreach ($contributors as $contributor)
         <tr>
             <th scope="row">{{ $loop->index + 1 }}</th>
-            <td>{{ $contributor->name }}</td>
+            <td>
+                {{ $contributor->name }}
+                @if ($contributor->pivot->user_id === Auth::id())
+                    <span style="color: #7fb4f5"> (You)</span>
+                @endif
+            </td>
             <td>{{ $contributor->email }}</td>
             <td>{{ $contributor->pivot->role }}</td>
             <td>

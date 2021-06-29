@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\CanEditContributor;
 use App\Http\Middleware\HasAccessToProject;
+use App\Http\Middleware\HasAlreadySentReport;
 use App\Http\Middleware\StoreProjectInSession;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -68,5 +69,7 @@ class Kernel extends HttpKernel
         'hasAccessToProject' => HasAccessToProject::class,
         'storeProjectInSession' => StoreProjectInSession::class,
         'canEditContributor' => CanEditContributor::class,
+        'canDeleteArticle' => CanDeleteArticle::class,
+        'hasAlreadySentReport' => HasAlreadySentReport::class
     ];
 }

@@ -14,5 +14,16 @@ class Article extends Model
         'title',
         'category_id',
         'project_id',
+        'slug'
     ];
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

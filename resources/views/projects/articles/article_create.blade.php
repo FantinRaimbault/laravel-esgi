@@ -1,5 +1,14 @@
 @extends('projects.layouts.app')
 @section('content')
+@if ($errors->any())
+<div class="alert alert-danger" role="alert">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 @if (session('success'))
 <div class="alert alert-success">
     {{ session('success') }}
@@ -14,10 +23,10 @@
     </a>
 </div>
 {!! Form::open(['url' => 'projects/' . Session::get('currentProject')['id'] . '/articles']) !!}
-{{ Form::label('title', 'Project Title') }}
+{{ Form::label('title', 'Article Title') }}
 {{ Form::text('title') }}
 {{ Form::label('category_id', 'Category') }}
-{{ Form::text('category_id') }}
+{{ Form::select('category_id', $categories) }}
 {{ Form::submit('Create') }}
 {!! Form::close() !!}
 @endsection

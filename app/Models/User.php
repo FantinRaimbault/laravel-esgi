@@ -88,4 +88,14 @@ class User extends Authenticatable
             }
         }
     }
+
+    public function isEditor() {
+        return Auth::user()->projects()->where('projects.id', Session::get('currentProject')['id'])->first()->pivot->role 
+            === Config::get('constants.contributors.roles.editor');
+    }
+
+    public function canPublishArticle() {
+        $contributor = Auth::user()->projects()->where('projects.id', Session::get('currentProject')['id'])->first()->pivot;
+        return in_array($contributor->role, Config::get('constants.contributors.canPublishArticle'));
+    }
 }

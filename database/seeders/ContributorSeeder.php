@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Contributor;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Config;
 
 class ContributorSeeder extends Seeder
 {
@@ -14,6 +15,6 @@ class ContributorSeeder extends Seeder
      */
     public function run()
     {
-        Contributor::factory(20)->create();
+        
     }
 }

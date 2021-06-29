@@ -3,11 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Models\Project;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
-class StoreProjectInSession
+class CanDeleteArticle
 {
     /**
      * Handle an incoming request.
@@ -18,9 +17,10 @@ class StoreProjectInSession
      */
     public function handle(Request $request, Closure $next)
     {
-        $projectId = $request->projectId;
-        $project = Project::findOrFail($projectId);
-        Session::put('currentProject', $project);
+        $user = Auth::user();
+        if($user->isEditor()) {
+            return back()->witherrors('You can\'t delete article, please ask to updgrade your role');
+        }
         return $next($request);
     }
 }

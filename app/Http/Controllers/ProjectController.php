@@ -35,7 +35,7 @@ class ProjectController extends Controller
 
     public function show($projectId)
     {
-        $project = Project::find($projectId);
+        $project = Project::findOrFail($projectId);
         return view('projects.informations', [
             "project" => $project
         ]);

@@ -40,7 +40,7 @@ class InvitationController extends Controller
     }
 
     public function accept(Request $request) {
-        $invitation = Invitation::find($request->route('invitationId'));
+        $invitation = Invitation::findOrFail($request->route('invitationId'));
         $contributor = new Contributor([
             "project_id" => $invitation->project_id,
             "user_id" => $invitation->user_id,
@@ -52,7 +52,7 @@ class InvitationController extends Controller
     }
 
     public function refuse(Request $request) {
-        $invitation = Invitation::find($request->route('invitationId'));
+        $invitation = Invitation::findOrFail($request->route('invitationId'));
         $invitation->delete();
         return back();
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnPublishArticlesTable extends Migration
+class AddSlugColumnDefaultValueProjectsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddColumnPublishArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::table('articles', function (Blueprint $table) {
-            $table->boolean('published');
+        Schema::table('projects', function (Blueprint $table) {
+            $table->text('slug')->default(uniqid())->change();
         });
     }
 
@@ -25,8 +25,8 @@ class AddColumnPublishArticlesTable extends Migration
      */
     public function down()
     {
-        Schema::table('articles', function (Blueprint $table) {
-            $table->dropColumn('published');
+        Schema::table('projects', function (Blueprint $table) {
+            $table->text('slug')->change();
         });
     }
 }

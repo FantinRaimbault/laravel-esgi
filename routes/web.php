@@ -16,3 +16,4 @@ require __DIR__.'/articles.php';
 require __DIR__.'/invitations.php';
 require __DIR__.'/contributors.php';
 require __DIR__.'/users.php';
+require __DIR__.'/reports.php';

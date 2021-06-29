@@ -25,8 +25,9 @@ class ContributorFactory extends Factory
     {
         return
         [
-            'user_id' => User::factory(1)->create()->first(),
+            'user_id' => User::factory(3)->create()->first(),
             'project_id' => Project::factory(1)->create()->first(),
+            'role' => 'superAdmin',
         ];
     }
 }

@@ -1,5 +1,14 @@
 @extends('projects.layouts.app')
 @section('content')
+@if ($errors->any())
+<div class="alert alert-danger" role="alert">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 @if (session('success'))
 <div class="alert alert-success">
     {{ session('success') }}
@@ -15,10 +24,14 @@
 </div>
 {!! Form::open(['url' => 'projects/' . Session::get('currentProject')['id'] . '/articles/' . $article->id, 'method' =>
 'put']) !!}
-{{ Form::label('title', 'Project Title') }}
+{{ Form::label('title', 'Article Title') }}
 {{ Form::text('title', $article->title) }}
 {{ Form::label('category_id', 'Category') }}
 {{ Form::text('category_id', $article->category_id) }}
+@if (!Auth::user()->isEditor())
+{{ Form::label('published', 'Published') }}
+{{ Form::checkbox('published', $article->published, $article->published) }}
+@endif
 {{ Form::submit('Save') }}
 {!! Form::close() !!}
 <button type="button" class="btn btn-danger m-3" data-toggle="modal" data-target="#exampleModalCenter">
