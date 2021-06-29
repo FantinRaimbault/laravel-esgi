@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -20,7 +19,4 @@ class Project extends Model
         return $this->belongsToMany(User::class, 'contributors')->withPivot(['role', 'id']);
     }
 
-    public function toto() {
-        return 'toto';
-    }
 }
