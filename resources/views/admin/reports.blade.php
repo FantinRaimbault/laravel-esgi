@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@section('main')
+@extends('layouts.main_navbar')
+@section('content')
 <h1>Reports</h1>
 @if ($errors->any())
 <div class="alert alert-danger" role="alert">
@@ -24,9 +24,11 @@
             <button type="button" class="btn btn-danger m-3" data-toggle="modal" data-target="#exampleModalCenter">
                 Delete article
             </button>
-            <button type="button" class="btn btn-danger m-3" data-toggle="modal" data-target="#exampleModalCenter">
-                Ban project
-            </button>
+            <a href="{{ url('admin/bans/projects/' . $article->project_id) }}">
+                <button type="button" class="btn btn-danger m-3" data-toggle="modal" data-target="#exampleModalCenter">
+                    Ban project
+                </button>
+            </a>
             @foreach ($article->reports as $report)
             <div class="accordion-body">
                 Report message : {{ $report->message }} - by : {{ $report->user->name }} / {{ $report->user->email }}

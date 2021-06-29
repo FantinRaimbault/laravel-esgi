@@ -16,7 +16,7 @@ class CreateBansTable extends Migration
         Schema::create('bans', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->timestamps('until');
+            $table->date('until');
             $table->foreignId('project_id');
             $table->text('cause');
         });

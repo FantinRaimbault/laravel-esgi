@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Ban extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'cause',
+        'project_id',
+        'until'
+    ];
 }
