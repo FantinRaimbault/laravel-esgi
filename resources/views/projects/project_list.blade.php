@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('main')
 @if ($errors->any())
-<div class="alert alert-primary" role="alert">
+<div class="alert alert-danger" role="alert">
     <ul>
         @foreach ($errors->all() as $error)
         <li>{{ $error }}</li>
@@ -23,7 +23,7 @@
     <a href="{{ url('projects/' . $project->id . '/informations') }}">
         <h2>Nom du projet: {{ $project->name}}</h2>
     </a>
-    
+
     @foreach($project->users as $user)
     <span>Collaborateurs: {{ $user->name }}</span>
     @endforeach

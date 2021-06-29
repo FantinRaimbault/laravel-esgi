@@ -3,11 +3,11 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Models\Report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 
-class HasAlreadySentReport
+class Admin
 {
     /**
      * Handle an incoming request.
@@ -18,12 +18,9 @@ class HasAlreadySentReport
      */
     public function handle(Request $request, Closure $next)
     {
-        $report = Report::where([
-            ['user_id', '=', Auth::id()],
-            ['article_id', '=', $request->route('articleId')]
-        ])->first();
-        if (!empty($report)) {
-            return back()->withErrors('You have already sent a report for this project');
+        $user = Auth::user();
+        if($user->role !== Config::get('constants.users.roles.admin')) {
+            return redirect('/projects')->withErrors('You can\'t access this ressource');
         }
         return $next($request);
     }
