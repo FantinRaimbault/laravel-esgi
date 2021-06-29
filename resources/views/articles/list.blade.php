@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@section('main')
+@extends('layouts.main_navbar')
+@section('content')
 <h1>Articles</h1>
 @if ($errors->any())
 <div class="alert alert-danger" role="alert">

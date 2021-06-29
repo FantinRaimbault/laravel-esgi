@@ -18,9 +18,11 @@ class IsProjectBanned
     public function handle(Request $request, Closure $next)
     {
         $ban = Ban::where('project_id', $request->projectId)->orderBy('until', 'desc')->first();
-        $today = (new \DateTime())->format('Y-m-d H:i:s');
-        if ($ban->until > $today) {
-            return back()->withErrors('Project is banned, cause : ' . $ban->cause . ', you can\'t create article until : ' . $ban->until);
+        if($ban) {
+            $today = (new \DateTime())->format('Y-m-d H:i:s');
+            if ($ban->until > $today) {
+                return back()->withErrors('Project is banned, cause : ' . $ban->cause . ', you can\'t create article until : ' . $ban->until);
+            }
         }
         return $next($request);
     }

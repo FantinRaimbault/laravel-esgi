@@ -1,5 +1,10 @@
 @extends('layouts.main_navbar')
-@section('content')
+@section('contentbis')
+<a href="{{ url('admin') }}">
+    <button type="button" class="btn btn-primary m-3">
+        Back
+    </button>
+</a>
 <h1>Ban project : {{ $project->name }}</h1>
 @if ($errors->any())
 <div class="alert alert-danger" role="alert">

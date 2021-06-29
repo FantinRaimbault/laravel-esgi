@@ -6,8 +6,6 @@ use App\Models\Ban;
 use App\Models\Article;
 use App\Models\Project;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
@@ -40,5 +38,18 @@ class AdminController extends Controller
         ]);
         $ban->save();
         return back()->with('success', 'project banned !');
+    }
+
+    public function showDeleteArticle(Request $request) {
+        $article = Article::findOrFail($request->route('articleId'));
+        return view('admin.article_delete', [
+            "article" => $article
+        ]);
+    }
+
+    public function deleteArticle(Request $request) {
+        $article = Article::findOrFail($request->route('articleId'));
+        $article->delete();
+        return back()->with('success', 'Article deleted !');
     }
 }
