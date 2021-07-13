@@ -24,6 +24,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -71,7 +72,6 @@ class User extends Authenticatable
     }
 
     public function canEditContributor($targetContributor) {
-        error_log('totototo');
         $contributor = Auth::user()->projects()->where('projects.id', Session::get('currentProject')['id'])->first()->pivot;
         if($contributor->user_id === $targetContributor->user_id) {
             return true;
@@ -79,9 +79,9 @@ class User extends Authenticatable
             switch ($contributor->role) {
                 case Config::get('constants.contributors.roles.editor'):
                     return false;
+                case Config::get('constants.contributors.roles.editor-in-chief'):
+                    return false;
                 case Config::get('constants.contributors.roles.admin'):
-                    return $targetContributor->role !== Config::get('constants.contributors.roles.superAdmin');
-                case Config::get('constants.contributors.roles.superAdmin'):
                     return true;
                 default:
                     throw new \Exception('invalid role');
@@ -92,6 +92,11 @@ class User extends Authenticatable
     public function isEditor() {
         return Auth::user()->projects()->where('projects.id', Session::get('currentProject')['id'])->first()->pivot->role 
             === Config::get('constants.contributors.roles.editor');
+    }
+
+    public function isAdminProject() {
+        return Auth::user()->projects()->where('projects.id', Session::get('currentProject')['id'])->first()->pivot->role 
+            === Config::get('constants.contributors.roles.admin');
     }
 
     public function isAdminApp()

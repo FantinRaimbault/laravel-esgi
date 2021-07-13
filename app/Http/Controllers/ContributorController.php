@@ -20,15 +20,20 @@ class ContributorController extends Controller
         ]);
     }
 
-    public function addContributor(Request $request)
+    public function addContributor()
     {
-        return view('projects.contributor_add');
+        $roles = Config::get('constants.contributors.roles');
+        return view('projects.contributor_add', [
+            "roles" => $roles
+        ]);
     }
 
     public function edit(Request $request) {
+        $roles = Config::get('constants.contributors.roles');
         $contributor = Contributor::findOrFail($request->route('contributorId'));
         return view('projects.contributor_edit', [
-            "contributor" => $contributor
+            "contributor" => $contributor,
+            "roles" => $roles
         ]);
     }
 
@@ -45,6 +50,6 @@ class ContributorController extends Controller
     public function delete(Request $request) {
         $contributor = Contributor::findOrFail($request->route('contributorId'));
         $contributor->delete();
-        return redirect('/projects/' . $request->route('projectId') . '/members')->with('success', 'User removed !');
+        return redirect('/projects/' . $request->route('projectId') . '/contributors')->with('success', 'User removed !');
     }
 }

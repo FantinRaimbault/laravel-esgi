@@ -10,16 +10,16 @@ return [
     'contributors' => [
         'roles' => [
             'editor' => 'editor',
+            'editor-in-chief' => 'editor-in-chief',
             'admin' => 'admin',
-            'superAdmin' => 'superAdmin',
         ],
         'canEditContributor' => [
+            'editor-in-chief' => 'editor-in-chief',
             'admin' => 'admin',
-            'superAdmin' => 'superAdmin',
         ],
         'canPublishArticle' => [
+            'editor-in-chief' => 'editor-in-chief',
             'admin' => 'admin',
-            'superAdmin' => 'superAdmin',
         ]
     ],
     'categories' => [

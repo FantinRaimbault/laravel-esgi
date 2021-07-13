@@ -17,7 +17,7 @@ class ProjectSeeder extends Seeder
     {
         Project::factory()->count(2)->create()->each(function ($project) {
             User::factory()->count(3)->create()->each(function ($user) use ($project) {
-                $user->projects()->attach($project['id'], ['role' => 'superAdmin']);
+                $user->projects()->attach($project['id'], ['role' => 'admin']);
             });
         });
     }

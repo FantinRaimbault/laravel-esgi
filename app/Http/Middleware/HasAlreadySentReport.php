@@ -23,7 +23,7 @@ class HasAlreadySentReport
             ['article_id', '=', $request->route('articleId')]
         ])->first();
         if (!empty($report)) {
-            return back()->withErrors('You have already sent a report for this project');
+            return back()->withErrors('You have already sent a report for this article');
         }
         return $next($request);
     }

@@ -14,10 +14,13 @@ Route::middleware(['auth'])->group(function () {
                 Route::post('/', [ArticleController::class, 'store']);
             });
             Route::get('/{articleId}/edit', [ArticleController::class, 'edit']);
+            Route::get('/{articleId}/edit/content', [ArticleController::class, 'editContent']);
+            Route::put('/{articleId}/edit/content', [ArticleController::class, 'updateContent']);
             Route::put('/{articleId}', [ArticleController::class, 'update']);
             Route::middleware(['canDeleteArticle'])->group(function () {
                 Route::delete('/{articleId}', [ArticleController::class, 'delete']);
             });
         });
     });
+    Route::get('/articles/{projectSlug}/{articleSlug}', [ArticleController::class, 'showContent']);
 });

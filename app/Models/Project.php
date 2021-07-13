@@ -20,4 +20,13 @@ class Project extends Model
         return $this->belongsToMany(User::class, 'contributors')->withPivot(['role', 'id']);
     }
 
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
+
+    public function getArticleBySlug($slug)
+    {
+        return $this->hasMany(Article::class)->where('slug', '=', $slug);
+    }
 }

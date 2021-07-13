@@ -12,7 +12,8 @@ class Ban extends Model
     protected $fillable = [
         'cause',
         'project_id',
-        'until'
+        'until',
+        'cause'
     ];
 
     public function project() {

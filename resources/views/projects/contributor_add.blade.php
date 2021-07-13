@@ -26,7 +26,7 @@
 {{ Form::label('email', 'Email') }}
 {{ Form::text('email') }}
 {{ Form::label('role', 'Role') }}
-{{ Form::text('role') }}
+{{ Form::select('role', $roles) }}
 {{ Form::submit('Send') }}
 {!! Form::close() !!}
 @endsection

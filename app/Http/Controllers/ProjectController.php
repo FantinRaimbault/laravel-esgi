@@ -31,7 +31,7 @@ class ProjectController extends Controller
             "slug" => preg_replace('/\s+/', '-', strtolower($request->name))
         ]);
         $project->save();
-        $user->projects()->attach($project->id, ['role' => Config::get('constants.contributors.roles.superAdmin')]);
+        $user->projects()->attach($project->id, ['role' => Config::get('constants.contributors.roles.admin')]);
         return back()->with('success', 'Project created !');
     }
 

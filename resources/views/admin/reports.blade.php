@@ -10,7 +10,8 @@
     </ul>
 </div>
 @endif
-@foreach ($articles as $article)
+    
+@forelse ($articles as $article)
 <div class="accordion" id="accordionExample">
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
@@ -23,6 +24,11 @@
         {{-- remove show to not shot first time --}}
         <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
             data-bs-parent="#accordionExample">
+            <a href="{{ url('articles/' . $article->project->slug . '/' . $article->slug) }}">
+                <button type="button" class="btn btn-primary m-3" data-toggle="modal" data-target="#exampleModalCenter">
+                    See article
+                </button>
+            </a>
             <a href="{{ url('admin/articles/' . $article->id . '/delete') }}">
                 <button type="button" class="btn btn-danger m-3" data-toggle="modal" data-target="#exampleModalCenter">
                     Delete article
@@ -41,6 +47,7 @@
         </div>
     </div>
 </div>
-@endforeach
-
+@empty
+<p>No reports here ...</p>
+@endforelse
 @endsection

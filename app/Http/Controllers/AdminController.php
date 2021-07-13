@@ -32,6 +32,8 @@ class AdminController extends Controller
             'until' => ['required', 'date', 'after:today'],
             'cause' => ['required'],
         ])->validate();
+        // delete if bans already exist
+        Ban::where('project_id', '=', $request->route('projectId'))->delete();
         $ban = new Ban([
             "project_id" => $request->route('projectId'),
             "cause" => $request->cause ?? '',
@@ -51,11 +53,11 @@ class AdminController extends Controller
     public function deleteArticle(Request $request) {
         $article = Article::findOrFail($request->route('articleId'));
         $article->delete();
-        return back()->with('success', 'Article deleted !');
+        return redirect('admin')->with('success', 'Article deleted !');
     }
 
-    public function showBannedProject() {
-        $bans = Ban::groupBy('project_id')->get(['project_id', DB::raw('MAX(until) as until')]);
+    public function showBannedProjects() {
+        $bans = Ban::all();
         return view('admin.banned_projects', [
             "bans" => $bans
         ]);
@@ -65,4 +67,5 @@ class AdminController extends Controller
         Ban::where('project_id', $request->route('projectId'))->delete();
         return back()->with('success', 'Ban removed from project !');
     }
+
 }

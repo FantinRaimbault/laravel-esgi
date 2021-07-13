@@ -18,6 +18,7 @@
             <th scope="col">Published</th>
             <th scope="col">Updated at</th>
             <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -31,8 +32,15 @@
             <td>{{ $article->updated_at }}</td>
             <td>
                 <a href="{{ url('projects/' . Session::get('currentProject')['id'] . '/articles/' . $article->id . '/edit') }}">
-                    <button type="button" class="btn btn-primary" data-toggle="modal">
+                    <button type="button" class="btn btn-secondary">
                         Edit
+                    </button>
+                </a>
+            </td>
+            <td>
+                <a href="{{ url('projects/' . Session::get('currentProject')['id'] . '/articles/' . $article->id . '/edit/content') }}">
+                    <button type="button" class="btn btn-primary">
+                        Edit Content
                     </button>
                 </a>
             </td>

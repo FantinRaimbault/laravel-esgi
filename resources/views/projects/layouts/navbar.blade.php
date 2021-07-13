@@ -3,6 +3,9 @@
         <div class="container-fluid">
             <a class="navbar-brand">{{ \Illuminate\Support\Str::limit(Session::get('currentProject')->name, 20, $end = '...')  }}</a>
             <div class="d-flex">
+                <a href="{{ url('users/profile') }}">
+                    <button class="btn btn-outline-success">{{ Auth::user()->name }}</button>
+                </a>
                 @if (Auth::user()->isAdminApp())
                 <a href="{{ url('admin') }}">
                     <button class="btn btn-outline-success" type="submit">Admin</button>

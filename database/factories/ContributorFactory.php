@@ -27,7 +27,7 @@ class ContributorFactory extends Factory
         [
             'user_id' => User::factory(3)->create()->first(),
             'project_id' => Project::factory(1)->create()->first(),
-            'role' => 'superAdmin',
+            'role' => 'admin',
         ];
     }
 }

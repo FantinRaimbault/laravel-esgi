@@ -25,21 +25,13 @@
         <tr>
             <th scope="row">{{ $loop->index + 1 }}</th>
             <td>{{ $ban->project->name }}</td>
-            <td>{{ $ban->cause ?? 'no cause' }}</td>
+            <td>{{ $ban->cause }}</td>
             <td>{{ $ban->until }}</td>
             <td>
                 {!! Form::open(['url' => '/admin/banned-projects/' . $ban->project_id, 'method' => 'delete']) !!}
                 {{ Form::submit('Remove ban') }}
                 {!! Form::close() !!}
             </td>
-            {{-- <td>
-                <a
-                    href="{{ url('projects/' . Session::get('currentProject')['id'] . '/articles/' . $article->id . '/edit') }}">
-                    <button type="button" class="btn btn-primary" data-toggle="modal">
-                        Edit
-                    </button>
-                </a>
-            </td> --}}
         </tr>
         @endforeach
     </tbody>
