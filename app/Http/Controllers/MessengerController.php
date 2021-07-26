@@ -12,7 +12,7 @@ class MessengerController extends Controller
 {
     public function index(Request $request) {
         $messages = Message::where('project_id', $request->projectId)->get();
-        return view('projects.messenger', ['messages' => $messages, 'projectId'=> $request->projectId]);
+        return view('projects.messenger', ['messages' => $messages, 'projectId'=> $request->projectId, 'userId' => Auth::id()]);
     }
 
     public function postMessage(Request $request){
