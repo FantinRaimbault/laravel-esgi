@@ -7,7 +7,6 @@ use App\Models\Invitation;
 use App\Models\Contributor;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Validator;
 
@@ -15,7 +14,7 @@ class InvitationController extends Controller
 {
     public function send(Request $request) {
         Validator::make($request->all(), [
-            'email' => ['required', 'email:rfc,dns'],
+            'email' => ['required', 'email'],
             'role' => ['required', Rule::in(Config::get('constants.contributors.roles')),],
         ])->validate();
         $email = $request->email;

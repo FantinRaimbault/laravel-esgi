@@ -23,7 +23,9 @@
 
         {!! Form::open(['url' => 'projects/' . Session::get('currentProject')['id'] . '/articles/' . $article->id . '/edit/content', 'method' => 'put']) !!}
         {{ Form::textarea('content', $article->content ?? '') }}
-        {{ Form::submit('Save') }}
+        {{ Form::submit('Save', [
+            "class" => "btn btn-primary full-width mt-3"
+        ]) }}
         {!! Form::close() !!}
     </div>
 
