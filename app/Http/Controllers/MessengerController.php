@@ -29,7 +29,7 @@ class MessengerController extends Controller
         event(new MessageWasSent($request->projectId, [
             "message"=>$request->message,
             "user"=>$message->user->name,
-            "created_at", $message->getAttribute('created_at')
+            "created_at", $message->created_at->format('H:m:s d/m/Y')
         ]));
         return back()->with('success', 'Message envoyé !');
     }

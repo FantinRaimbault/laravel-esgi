@@ -19,7 +19,7 @@
         <div id="messages" style="height: 75%; width: 70%; background-color: #F5F7F7; display: flex; align-items: center; overflow: scroll; flex-direction: column">
             @foreach($messages as $m)
                 <div class="{{ $m->user_id === $userId ? 'alert alert-info' : 'alert alert-secondary' }}" style="display: flex; align-self: {{ $m->user_id === $userId ? 'flex-end' : 'flex-start' }}; flex-direction: column;justify-content: space-between; align-items: center; width: 35%;">
-                    <p>{{$m->user_id === $userId? 'Me' : $m->user->name}} at {{$m->created_at}}</p>
+                    <p>{{$m->user_id === $userId? 'Me' : $m->user->name}} at {{$m->created_at->format('H:m:s d/m/Y')}}</p>
                     <p>{{$m->message}}</p>
                 </div>
             @endforeach
@@ -38,11 +38,17 @@
 
         container.scrollTop = container.scrollHeight;
 
-        const div = document.createElement('div');
         var channel = Echo.channel('project-{{$projectId}}');
         channel.listen('.message', function(data) {
-            div.innerHTML = `<p>${data.message.user} at ${data.message.created_at}</p><p>${data.message.message}</p>`;
+            const div = document.createElement('div');
+            console.log(data)
+            data.user_id === {{$userId}} ? div.classList.add('alert','alert-info') : div.classList.add('alert','alert-secondary');
+            div.style = style=`display: flex; align-self: ${ data.user_id === {{$userId}} ? 'flex-end' : 'flex-start' }; flex-direction: column;justify-content: space-between; align-items: center; width: 35%;`
+            div.innerHTML = `<p>${data.message.user} at ${data.message[1]}</p><p>${data.message.message}</p>`;
             container.appendChild(div);
+            container.scrollTop = container.scrollHeight
         });
     </script>
 @endsection
+
+
