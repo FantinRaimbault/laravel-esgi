@@ -4,12 +4,12 @@
 
 ## Migrations 
 
-``` docker exec -it projet_web_1 php artisan migrate ```
+``` docker exec -it laravel-esgi_web_1 php artisan migrate ```
 
 ## Seeding
 
-```docker exec -it projet_web_1 php artisan migrate:fresh --seed```
-``` docker exec -it projet_web_1 php artisan db:seed --class=YourSeeder ``` 
+```docker exec -it laravel-esgi_web_1 php artisan migrate:fresh --seed```
+``` docker exec -it laravel-esgi_web_1 php artisan db:seed --class=YourSeeder ``` 
 
 ## Model 
 
