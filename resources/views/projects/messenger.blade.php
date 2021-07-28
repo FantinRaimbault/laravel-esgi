@@ -15,7 +15,7 @@
                 {{ session('success') }}
             </div>
         @endif
-        <h1 style="margin-top: 2%">Messagerie</h1>
+        <h1 style="margin-top: 2%">Messenger</h1>
         <div id="messages" style="height: 75%; width: 70%; background-color: #F5F7F7; display: flex; align-items: center; overflow: scroll; flex-direction: column">
             @foreach($messages as $m)
                 <div class="{{ $m->user_id === $userId ? 'alert alert-info' : 'alert alert-secondary' }}" style="display: flex; align-self: {{ $m->user_id === $userId ? 'flex-end' : 'flex-start' }}; flex-direction: column;justify-content: space-between; align-items: center; width: 35%;">
