@@ -22,6 +22,3 @@
 ## Controller 
 
 ```php artisan make:controller Controller ```
-
-## Seeding 
-
